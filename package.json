@@ -1,26 +1,11 @@
 {
-  "name": "react-toast-notifications",
-  "version": "2.5.1",
+  "name": "@codeplant/react-toast-notifications",
+  "version": "3.1.0",
   "description": "A configurable, composable, toast notification system for react.",
   "main": "dist/index.js",
   "typings": "./index.d.ts",
   "license": "MIT",
   "author": "Joss Mackison (https://github.com/jossmac)",
-  "homepage": "https://jossmac.github.io/react-toast-notifications",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jossmac/react-toast-notifications.git"
-  },
-  "bugs": {
-    "url": "https://github.com/jossmac/react-toast-notifications/issues"
-  },
-  "keywords": [
-    "react",
-    "toast",
-    "toasts",
-    "notification",
-    "notifications"
-  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
@@ -32,7 +17,8 @@
     "prepublishOnly": "npm run build",
     "build:examples": "webpack --mode production",
     "deploy:examples": "gh-pages -d examples/dist",
-    "publish:examples": "npm run build:examples && npm run deploy:examples"
+    "publish:examples": "npm run build:examples && npm run deploy:examples",
+    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags"
   },
   "prettier": {
     "proseWrap": "preserve",
@@ -41,6 +27,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.14",
+    "fsevents": "^2.3.3",
     "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
@@ -70,7 +57,13 @@
     "webpack-dev-server": "^3.1.3"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "volta": {
+    "node": "18.13.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
